@@ -141,6 +141,11 @@ def false_ip_action():
     check_times = 3
     for i in range(1, check_times + 1):
         print(f"\n第{i}次检查开始" + ">" * 100, flush=True)
+
+        if not ipfalse:
+            print("所有IP均已成功连接，提前结束检查。", flush=True)
+            return ipfalse
+
         # 临时存储本轮检查通过的IP
         temp_pass_ips = []
         for ip in ipfalse:
@@ -229,8 +234,8 @@ def send_erro():
 if __name__ == "__main__":
     print("定时任务开始>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", flush=True)
     schedule.every().day.at("08:00").do(send_erro)
-    schedule.every().day.at("13:00").do(send_erro)
-    schedule.every().day.at("16:30").do(send_erro)
+    schedule.every().day.at("12:30").do(send_erro)
+    schedule.every().day.at("16:00").do(send_erro)
     print("检车是否符合定时条件>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", flush=True)
     while True:
         schedule.run_pending()
