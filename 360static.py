@@ -69,12 +69,10 @@ def socks_connet(ip):
         print(f"{response.text}", flush=True)
 
 
-
 def worker(datalist):
     """
     在每个线程中执行sockes函数操作
     """
-
     # 单线程列表，相对来说是局部变量
     lock_rsult = []
     # 声明全局变量false
@@ -119,7 +117,6 @@ def ipdata_action():
     with lock:
         final_list = false.copy()
 
-
     false.clear()
     print(f'打印清除后的false的值{false}')
     print(
@@ -132,18 +129,26 @@ def ipdata_action():
 def false_ip_action():
     """
     对链接失败的IP再次重新链接
-    :return:
+    :return: 最终检查结果
     """
-    ipfalse_first = ipdata_action()
-    print("第二次检查开始>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", flush=True)
-    print(f"打印第一次链接失败的IP{ipfalse_first}", flush=True)
-    false2test = []
-    for ip in ipfalse_first:
-        if socks_connet(ip) is not None:
-            false2test.append(ip)
+    # 初始失败的IP列表
+    ipfalse = ipdata_action()
+    print(f"打印初始链接失败的IP: {ipfalse}", flush=True)
 
-    print(f"打印第二次检查结果{false2test}")
-    return false2test
+    # 检查次数
+    check_times = 3
+    for i in range(1, check_times + 1):
+        print(f"\n第{i}次检查开始" + ">" * 100, flush=True)
+        # 临时存储本轮检查通过的IP
+        temp_pass_ips = []
+        for ip in ipfalse:
+            if socks_connet(ip) is not None:
+                temp_pass_ips.append(ip)
+        # 更新失败的IP列表为本轮检查通过的IP
+        ipfalse = temp_pass_ips
+        print(f"打印第{i}次检查结果: {ipfalse}")
+
+    return ipfalse
 
 
 def timejob():
@@ -179,12 +184,12 @@ def msg_action(iplist):
                 if subnet in ip:
                     ip_count[subnet].append(ip)
 
-    #打印处理后的IP
+    # 打印处理后的IP
     print(ip_count)
     msg = []
     for key, num in ip_count.items():
         msg.append(f"{key}X号段有{num}(个)不可用！")
-    #打印代发消息
+    # 打印代发消息
     print(msg)
 
     return msg
@@ -199,7 +204,7 @@ def send_erro():
     discountiplsit = list(set(falseip))
     print(f"打印要发送的信息{discountiplsit}")
     if len(discountiplsit) != 0:
-        msg = f"360预警：{msg_action(discountiplsit)}"
+        msg = f"360预警：{msg_action(discountiplsit)},测试链接为：https://ipip.922proxy.com/ip_info，请手动提取IP并更换链接进行测试"
 
         url = "https://oapi.dingtalk.com/robot/send?access_token=8ecd6e0718977d701c67c8f22a5adffdf88543a6fd1732ed54bd387d8f478fdb"
 
@@ -219,19 +224,15 @@ def send_erro():
         respose = requests.post(url=url, data=data_string, headers={'Content-Type': 'application/json'})
         print(respose.text)
 
-
     # else:
     #     msg = "360预警:测试360静态IP池全部IP可以链接"
 
 
-
-
-
 if __name__ == "__main__":
     print("定时任务开始>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", flush=True)
-    schedule.every().day.at("09:50").do(send_erro)
-    schedule.every().day.at("13:50").do(send_erro)
-    schedule.every().day.at("17:50").do(send_erro)
+    schedule.every().day.at("09:30").do(send_erro)
+    schedule.every().day.at("14:00").do(send_erro)
+    schedule.every().day.at("17:20").do(send_erro)
 
     print("检车是否符合定时条件>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", flush=True)
     while True:
