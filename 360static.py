@@ -231,11 +231,9 @@ if __name__ == "__main__":
     print("定时任务开始>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", flush=True)
     schedule.every().day.at("09:50").do(send_erro)
     schedule.every().day.at("13:50").do(send_erro)
-    schedule.every().day.at("17:55").do(send_erro)
+    schedule.every().day.at("17:50").do(send_erro)
 
     print("检车是否符合定时条件>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", flush=True)
     while True:
         schedule.run_pending()
         time.sleep(1)
-
-# 后台挂载命令 ：nohup python 360static.py >> 360print 2>&1 &

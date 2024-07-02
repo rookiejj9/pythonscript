@@ -229,7 +229,3 @@ if __name__ == "__main__":
     while True:
         schedule.run_pending()
         time.sleep(1)
-
-
-# 后台挂载命令 ：nohup python 922static.py >> 922print 2>&1 &
-# 查看文件中特定的内容：grep "特定内容" 文件名： grep -Eo '185\.65\.61\.[0-9]+' /path/to/your/file
