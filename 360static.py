@@ -18,16 +18,16 @@ def connect_mysql():
     """
 
     connection = mysql.connector.connect(
-        host="sg-cdb-efwgl4tn.sql.tencentcdb.com",
-        port="63997",
-        user="gd_ceshi_360",
-        password="Aq36Dyb7kxUu8S",
-        database="master360",
+        host="",
+        port="",
+        user="",
+        password="",
+        database="",
     )
 
     curses = connection.cursor()
     curses.execute(
-        "SELECT ip FROM `cm_static_ip_pool` where `status` = 1")
+        "SELECT ip FROM `` where `status` = 1")
     ipdata = curses.fetchall()
     curses.close()
 
@@ -45,9 +45,9 @@ def socks_connet(ip):
     :return:url，proxies
     """
     testip = ip
-    testport = 6305
-    username = "LgdTbNfg2A3iL8sK9pRx"
-    password = "B51xRfL4yG9aC3hS6pN2"
+    testport = 
+    username = ""
+    password = ""
 
     proxy = f'socks5://{username}:{password}@{testip}:{testport}'
 
@@ -58,7 +58,7 @@ def socks_connet(ip):
     }
 
     # 你的目标URL
-    url = 'https://ipip.922proxy.com/ip_info'
+    url = ''
 
     try:
         response = requests.post(url=url, proxies=proxies, timeout=10)
@@ -209,9 +209,9 @@ def send_erro():
     discountiplsit = list(set(falseip))
     print(f"打印要发送的信息{discountiplsit}")
     if len(discountiplsit) != 0:
-        msg = f"360预警：{msg_action(discountiplsit)},测试链接为：https://ipip.922proxy.com/ip_info，请手动提取IP并更换链接进行测试"
+        msg = f"360预警：{msg_action(discountiplsit)},测试链接为：，请手动提取IP并更换链接进行测试"
 
-        url = "https://oapi.dingtalk.com/robot/send?access_token=8ecd6e0718977d701c67c8f22a5adffdf88543a6fd1732ed54bd387d8f478fdb"
+        url = ""
 
         data = {
             "msgtype": "text",
