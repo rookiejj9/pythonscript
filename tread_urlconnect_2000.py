@@ -1,7 +1,7 @@
 import concurrent.futures
 import requests
 
-with open('C:\\Users\\liguodong\\Desktop\\新建文本文档.txt', 'r') as file:
+with open('', 'r') as file:
     lines = file.readlines()
 
 wrapped_lines = ['{}'.format('https://' + line.strip()) for line in lines]
