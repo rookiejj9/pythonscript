@@ -17,7 +17,7 @@ def socks_connet(ip, port):
     }
 
     # 你的目标URL
-    url = 'https://ipinfo.io/'
+    url = ''
 
     try:
         response = requests.post(url=url, proxies=proxies, timeout=10)
@@ -28,4 +28,4 @@ def socks_connet(ip, port):
         print(f"{response.text}", flush=True)
 
 
-socks_connet('first.proxys5.net', '6250')
+socks_connet('', '')
