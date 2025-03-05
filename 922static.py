@@ -18,16 +18,16 @@ def connect_mysql():
     """
 
     connection = mysql.connector.connect(
-        host="sg-cdb-hbdnufk9.sql.tencentcdb.com",
-        port="54193",
-        user="gd_ceshi_922",
-        password="Aq36Dyb7kxUu8S",
-        database="master922",
+        host="",
+        port="",
+        user="",
+        password="",
+        database="",
     )
 
     curses = connection.cursor()
     curses.execute(
-        "SELECT ip FROM `cm_static_ip_pool` where `status` = 1 AND`ip` NOT LIKE '%206.237.82.%' AND `ip` NOT LIKE '%206.237.83.%' AND `ip` NOT LIKE '%206.237.84.%' AND `ip` NOT LIKE '%206.237.85.%' ORDER BY id")
+        "SELECT ip FROM `` where `status` = 1 AND`ip` NOT LIKE '%206.237.82.%' AND `ip` NOT LIKE '%206.237.83.%' AND `ip` NOT LIKE '%206.237.84.%' AND `ip` NOT LIKE '%206.237.85.%' ORDER BY id")
     ipdata = curses.fetchall()
     curses.close()
 
@@ -45,9 +45,9 @@ def socks_connet(ip):
     :return:url，proxies
     """
     testip = ip
-    testport = 6505
-    username = "AutoG2kl7Pn4Qys8U"
-    password = "X9cL3pRqS2k7H4m"
+    testport = 
+    username = ""
+    password = ""
 
     proxy = f'socks5://{username}:{password}@{testip}:{testport}'
 
@@ -58,7 +58,7 @@ def socks_connet(ip):
     }
 
     # 你的目标URL
-    url = 'https://ipip.922proxy.com/ip_info'
+    url = ''
 
     try:
         response = requests.post(url=url, proxies=proxies, timeout=10)
@@ -211,9 +211,9 @@ def send_erro():
     discountiplsit = list(set(falseip))
     print(f"打印要发送的信息{discountiplsit}")
     if len(discountiplsit) != 0:
-        msg = f"922预警：{msg_action(discountiplsit)}，测试链接为：https://ipip.922proxy.com/ip_info，请手动提取IP并更换链接进行测试"
+        msg = f"922预警：{msg_action(discountiplsit)}，测试链接为：，请手动提取IP并更换链接进行测试"
 
-        url = "https://oapi.dingtalk.com/robot/send?access_token=07dfbc506433d7241f80c3046d7c54518104ddb3f4f97fde2f3b8a60bf441a58"
+        url = ""
 
         data = {
             "msgtype": "text",
